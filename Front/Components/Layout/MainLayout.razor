@@ -11,11 +11,11 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    <p>Hello, @context.User.Identity.Name !</p>
-                    <a @onclick="Logout">Logout</a>
+                    <p>Bonjour, @context.User.Identity.Name !</p>
+                    <a @onclick="Logout">Se déconnecter</a>
                 </Authorized>
                 <NotAuthorized>
-                    <p>You're not connected.</p>
+                    <p>Vous n'êtes pas connecté</p>
                 </NotAuthorized>
             </AuthorizeView>
             
@@ -29,7 +29,7 @@
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
+    <a href="" class="reload">Recharger</a>
     <a class="dismiss">🗙</a>
 </div>
 
