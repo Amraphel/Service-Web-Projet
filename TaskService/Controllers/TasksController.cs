@@ -29,7 +29,7 @@ namespace TaskService.Controllers
         [HttpGet("{id}")]
         public Entities.Task? Get(int id)
         {
-            return _tasks.Find(t => t.Id == id);
+            return _tasks.Find(t => t.UserID == id);
         }
 
         // POST api/Tasks
@@ -42,7 +42,7 @@ namespace TaskService.Controllers
                 Id = index,
                 IsDone = task.IsDone,
                 Text = task.Text,
-                User = task.User
+                UserID = task.UserID
             });
         }
 
@@ -57,7 +57,7 @@ namespace TaskService.Controllers
             }
             task.Text = taskUpdate.Text;
             task.IsDone = taskUpdate.IsDone;
-            task.User = taskUpdate.User;
+            task.UserID = taskUpdate.UserID;
 
             return Ok(task);
         }
