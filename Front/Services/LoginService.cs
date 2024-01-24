@@ -13,9 +13,10 @@ namespace Front.Services
         private ProtectedLocalStorage _sessionStorage;
         private readonly HttpClient _httpClient;
 
-        public LoginService(HttpClient httpClient)
+        public LoginService(HttpClient httpClient, ProtectedLocalStorage sessionStorage)
         {
             _httpClient = httpClient;
+            _sessionStorage = sessionStorage;
         }
 
         public async Task<UserDTO> AuthenticateUserAsync(string username, string password)
@@ -27,9 +28,16 @@ namespace Front.Services
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<JWTAndUser>();
+                if(result!=null)
+                {
+                    await _sessionStorage.SetAsync("jwt", result.Token);
+                    return result.User;
+                }
+                else
+                {
+                    return null;
+                }
 
-                await _sessionStorage.SetAsync("jwt", result.Token);
-                return result.User;
             }
             else
             {
