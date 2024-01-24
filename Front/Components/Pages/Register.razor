@@ -35,8 +35,9 @@
             var user = await loginService.RegisterUser(registerModel.Username, registerModel.Password, registerModel.Email);
             if (user != null)
             {
+                var userClaim = await ((CustomAuthenticationStateProvider)authStateProvider).MarkUserAsAuthenticated(user);
                 error = "";
-                NavigationManager.NavigateTo("/login");
+                NavigationManager.NavigateTo("/");
             }
             else
             {

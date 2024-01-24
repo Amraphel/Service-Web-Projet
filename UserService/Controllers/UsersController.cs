@@ -33,7 +33,6 @@ namespace UserService.Controllers
                 .ToListAsync();
         }
 
-        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
@@ -47,7 +46,6 @@ namespace UserService.Controllers
             return UserToDTO(user);
         }
 
-        // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserUpdateModel userUdpate)
         {
@@ -135,7 +133,7 @@ namespace UserService.Controllers
             }
         }
 
-        // DELETE: api/Users/5
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
