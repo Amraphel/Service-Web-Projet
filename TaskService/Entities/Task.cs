@@ -8,10 +8,13 @@ namespace TaskService.Entities
 
         public bool IsDone { get; set; }
 
+        public string User {get; set; }
+
     }
     public class TaskCreate
     {
         public required string Text { get; set; }
         public bool IsDone { get; set; }
+        public string User {get; set; }
     }
 }

@@ -41,7 +41,8 @@ namespace TaskService.Controllers
             {
                 Id = index,
                 IsDone = task.IsDone,
-                Text = task.Text
+                Text = task.Text,
+                User = task.User
             });
         }
 
@@ -56,6 +57,7 @@ namespace TaskService.Controllers
             }
             task.Text = taskUpdate.Text;
             task.IsDone = taskUpdate.IsDone;
+            task.User = taskUpdate.User;
 
             return Ok(task);
         }
