@@ -11,8 +11,9 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    <p>Bonjour, @context.User.Identity.Name !</p>
-                    <a @onclick="Logout">Se déconnecter</a>
+                    <p>@context.User.Identity.Name
+                        <button class="btn btn-primary" @onclick="Logout">Se déconnecter</button>
+                    </p>
                 </Authorized>
                 <NotAuthorized>
                     <p>Vous n'êtes pas connecté</p>
