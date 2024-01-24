@@ -36,6 +36,23 @@ namespace Front.Services
                 return null;
             }
         }
+
+        public async Task<UserDTO> RegisterUser(string username, string password, string email)
+        {
+            var registerInfo = new UserCreate() { Name = username, Password = password, Email = email };
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/User/register", registerInfo);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<UserDTO>();
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
 
