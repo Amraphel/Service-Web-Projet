@@ -1,6 +1,6 @@
-﻿namespace GatewayService.entities
+namespace TaskService.Entities
 {
-    public class Task
+    public class Todo
     {
         public int Id { get; set; }
 
@@ -8,13 +8,11 @@
 
         public bool IsDone { get; set; }
 
-        public required int UserID { get; set; }
 
     }
-    public class TaskCreate
+    public class TodoCreate
     {
         public required string Text { get; set; }
         public bool IsDone { get; set; }
-        public required int UserID { get; set; }
     }
 }
