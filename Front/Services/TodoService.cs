@@ -44,7 +44,7 @@ namespace Front.Services
             var task = new TodoCreate() { IsDone = false, Text = "Empty" };
 
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
-
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.Value);
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/Todo/create", task);
 
             Console.WriteLine(response.Content.ToString());
@@ -66,6 +66,7 @@ namespace Front.Services
 
             Console.WriteLine($"update todo {todo.Id} {todo.IsDone} {todo.Text}");
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.Value);
             HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/Todo/update/{todo.Id}", task);
 
             Console.WriteLine(response.Content.ToString());
@@ -85,6 +86,7 @@ namespace Front.Services
         public async Task Delete(int id)
         {
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("H6K5Wiv9JDyy8mEba5Sc6zvH3HmsFk853K85kZ2J77aR", jwt.Value);
             HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:5000/api/Todo/delete/{id}");
 
             Console.WriteLine(response.Content.ToString());
