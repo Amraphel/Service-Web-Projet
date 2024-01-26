@@ -40,11 +40,14 @@ namespace GatewayService.Controllers
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var result = await response.Content.ReadFromJsonAsync<UserDTO>();
-                    if(result!=null){
+                    if (result != null)
+                    {
                         var jwt = GenerateJwtToken(result.Id);
                         var userAndToken = new JWTAndUser() { Token = jwt, User = result };
                         return Ok(userAndToken);
-                    } else {
+                    }
+                    else
+                    {
                         return BadRequest("Login failed");
                     }
                 }
@@ -119,5 +122,5 @@ namespace GatewayService.Controllers
     }
 
 
-    
+
 }

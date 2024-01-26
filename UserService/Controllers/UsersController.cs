@@ -61,10 +61,11 @@ namespace UserService.Controllers
                 return NotFound();
             }
 
-            if(userUdpate.Name != null) user.Name = userUdpate.Name;
-            if(userUdpate.Email != null) user.Email = userUdpate.Email;
+            if (userUdpate.Name != null) user.Name = userUdpate.Name;
+            if (userUdpate.Email != null) user.Email = userUdpate.Email;
 
-            if(userUdpate.Password != null) {
+            if (userUdpate.Password != null)
+            {
                 user.PasswordHash = _passwordHasher.HashPassword(user, userUdpate.Password);
             }
 

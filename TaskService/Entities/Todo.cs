@@ -8,7 +8,6 @@ namespace TaskService.Entities
 
         public bool IsDone { get; set; }
 
-
     }
     public class TodoCreate
     {

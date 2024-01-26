@@ -23,7 +23,7 @@ namespace UserService.Entities
     }
 
 
-     public class JWTAndUser
+    public class JWTAndUser
     {
         public required string Token { get; set; }
         public required UserDTO User { get; set; }
