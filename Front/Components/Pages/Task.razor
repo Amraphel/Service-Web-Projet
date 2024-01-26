@@ -26,7 +26,6 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Status</th>
                 <th>Text</th>
             </tr>
@@ -34,15 +33,38 @@ else
         <tbody>
             @foreach (var todo in todos)
             {
-                <tr>
-                    <td>@todo.Id</td>
-                    <td><InputCheckbox @bind-Value="@todo.IsDone" /></td>
-                    <td>
-                        <InputText @bind-Value="todo.Text" />
-                        <button class="btn btn-danger" @onclick="() => UpdateTodo(todo)">Save</button>
-                        <button class="btn btn-danger" @onclick="() => DeleteTodo(todo.Id)">X</button>
-                    </td>
-                </tr>
+                @if (!todo.IsDone)
+                {
+                    <tr>
+                        <td><InputCheckbox @bind-Value="@todo.IsDone" /></td>
+                        <td>
+                            <InputText @bind-Value="todo.Text" />
+                            <button class="btn btn-danger" @onclick="() => UpdateTodo(todo)">Save</button>
+                            <button class="btn btn-danger" @onclick="() => DeleteTodo(todo.Id)">X</button>
+                        </td>
+                    </tr>
+                }
+
+            }
+            <tr>
+                <th>Terminée(s)</th>
+            </tr>
+            @foreach (var todo in todos)
+            {
+                @if (todo.IsDone)
+                {
+
+
+                    <tr>
+                        <td><InputCheckbox @bind-Value="@todo.IsDone" /></td>
+                        <td>
+                            <InputText @bind-Value="todo.Text" />
+                            <button class="btn btn-danger" @onclick="() => UpdateTodo(todo)">Save</button>
+                            <button class="btn btn-danger" @onclick="() => DeleteTodo(todo.Id)">X</button>
+                        </td>
+                    </tr>
+                }
+
             }
         </tbody>
     </table>

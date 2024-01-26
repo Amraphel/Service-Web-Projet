@@ -22,6 +22,8 @@ namespace Front.Services
             _sessionStorage = sessionStorage;
         }
 
+
+        //Il y a une erreur lors du changemnt d'utilisateur ou ce dernier voit les taches créé par les autres utilisateurs
         public async Task<Todo[]> GetAllTasks()
         {
             //Recuperation de jeton
@@ -40,6 +42,7 @@ namespace Front.Services
                 return [];
             }
         }
+        
 
         public async Task<Todo> CreateNewTask()
         {
