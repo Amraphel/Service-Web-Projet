@@ -16,22 +16,20 @@ namespace GatewayService.Controllers
             client.BaseAddress = new System.Uri("http://localhost:5002/");
         }
 
+        //Récuperation des taches
         [Authorize]
         [HttpGet]
         public async Task<ActionResult> GetMyTaskAsync()
         {
+            //Vérification des autorisations utilisateur
             var UserId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             if (UserId == null) return Unauthorized();
 
             HttpResponseMessage response = await client.GetAsync($"api/Todo/list/{UserId}");
-            Console.WriteLine(response.Content);
-            Console.WriteLine(response.StatusCode);
 
-            // Check if the response status code is 2XX
             if (response.IsSuccessStatusCode)
             {
                 var tasks = await response.Content.ReadFromJsonAsync<Entities.Todo[]>();
-                //var tasks = JsonSerializer.Deserialize<Entities.Task[]>(json);
                 return Ok(tasks);
             }
             else
@@ -41,16 +39,18 @@ namespace GatewayService.Controllers
 
         }
 
+        //Creation de tache
         [Authorize]
         [HttpPost("create")]
         public async Task<ActionResult> CreateTask(TodoCreate task)
         {
+            //Vérification des autorisations utilisateur
             var UserId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             if (UserId == null) return Unauthorized();
 
             HttpResponseMessage response = await client.PostAsJsonAsync($"api/Todo/create/{UserId}", task);
 
-            // Check if the response status code is 2XX
+            
             if (response.IsSuccessStatusCode)
             {
                 var newTask = await response.Content.ReadFromJsonAsync<Entities.Todo>();
@@ -60,19 +60,21 @@ namespace GatewayService.Controllers
             {
                 return BadRequest("CreateTask failed");
             }
-            // Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJDeXJpdXMiLCJVc2VySWQiOiIxIiwibmFtZSI6IkN5cml1cyIsImV4cCI6MTcwMzIwMDUwMSwiaXNzIjoiWW91cklzc3VlciIsImF1ZCI6IllvdXJBdWRpZW5jZSJ9.xIuvzZ8UhPvClf5gP1GY33N-JrMSBUdrtQ6lvTnRJ0I
+
         }
 
+        //Mise a jour de tache
         [Authorize]
         [HttpPut("update/{id}")]
         public async Task<ActionResult> UpdateTask(int id, TodoCreate task)
         {
+            //Vérification des autorisations utilisateur
             var UserId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             if (UserId == null) return Unauthorized();
 
             HttpResponseMessage response = await client.PutAsJsonAsync($"api/Todo/update/{UserId}/{id}", task);
 
-            // Check if the response status code is 2XX
+
             if (response.IsSuccessStatusCode)
             {
                 var newTask = await response.Content.ReadFromJsonAsync<Entities.Todo>();
@@ -85,18 +87,17 @@ namespace GatewayService.Controllers
 
         }
 
+        //Suppression de tache
         [Authorize]
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> DeleteTask(int id)
         {
+            //Vérification des autorisations utilisateur
             var UserId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
             if (UserId == null) return Unauthorized();
 
             HttpResponseMessage response = await client.DeleteAsync($"api/Todo/delete/{UserId}/{id}");
 
-            Console.WriteLine(response.Content);
-            Console.WriteLine(response.StatusCode);
-            // Check if the response status code is 2XX
             if (response.IsSuccessStatusCode)
             {
                 string str = await response.Content.ReadAsStringAsync();

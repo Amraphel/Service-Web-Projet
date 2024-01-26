@@ -24,7 +24,9 @@ namespace Front.Services
 
         public async Task<Todo[]> GetAllTasks()
         {
+            //Recuperation de jeton
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            //Authentification de l'utilisateur
             HttpResponseMessage response = await _httpClient.GetAsync("http://localhost:5000/api/Todo");
 
             if (response.IsSuccessStatusCode)
@@ -43,12 +45,12 @@ namespace Front.Services
         {
             var task = new TodoCreate() { IsDone = false, Text = "Empty" };
 
+            //Recuperation de jeton
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            //Authentification de l'utilisateur
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.Value);
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/Todo/create", task);
 
-            Console.WriteLine(response.Content.ToString());
-            Console.WriteLine(response.StatusCode);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<Todo>();
@@ -65,12 +67,14 @@ namespace Front.Services
             var task = new TodoCreate() { IsDone = todo.IsDone, Text = todo.Text };
 
             Console.WriteLine($"update todo {todo.Id} {todo.IsDone} {todo.Text}");
+
+            //Recuperation de jeton
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            //Authentification de l'utilisateur
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt.Value);
             HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"http://localhost:5000/api/Todo/update/{todo.Id}", task);
 
-            Console.WriteLine(response.Content.ToString());
-            Console.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<Todo>();
@@ -85,12 +89,13 @@ namespace Front.Services
 
         public async Task Delete(int id)
         {
+            //Recuperation de jeton
             var jwt = await _sessionStorage.GetAsync<string>("jwt");
+            //Authentification de l'utilisateur
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("H6K5Wiv9JDyy8mEba5Sc6zvH3HmsFk853K85kZ2J77aR", jwt.Value);
             HttpResponseMessage response = await _httpClient.DeleteAsync($"http://localhost:5000/api/Todo/delete/{id}");
 
-            Console.WriteLine(response.Content.ToString());
-            Console.WriteLine(response.StatusCode);
+
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception("Error deleting");
