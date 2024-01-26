@@ -32,12 +32,12 @@ namespace UserService.Controllers
                 .Select(u => UserToDTO(u))
                 .ToListAsync();
         }
-
+        //Récupération d'id User
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUser(int id)
         {
             var user = await _context.User.FindAsync(id);
-
+            //On vérifie l'existence de l'utilisateur
             if (user == null)
             {
                 return NotFound();
@@ -45,22 +45,24 @@ namespace UserService.Controllers
 
             return UserToDTO(user);
         }
-
+        //Mise à jour de l'utilisateur
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserUpdateModel userUdpate)
         {
+            //On verifie la requete
             if (id != userUdpate.Id)
             {
                 return BadRequest();
             }
 
             var user = await _context.User.FindAsync(id);
-
+            //On vérifie l'existence de l'utilisateur
             if (user == null)
             {
                 return NotFound();
             }
 
+            //On applique les changements s'il y en a
             if (userUdpate.Name != null) user.Name = userUdpate.Name;
             if (userUdpate.Email != null) user.Email = userUdpate.Email;
 

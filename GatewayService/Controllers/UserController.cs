@@ -40,9 +40,12 @@ namespace GatewayService.Controllers
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var result = await response.Content.ReadFromJsonAsync<UserDTO>();
+
                     if (result != null)
                     {
+                        //On genere le token
                         var jwt = GenerateJwtToken(result.Id);
+                        //On cree l'objet contenant l'user et le jeton
                         var userAndToken = new JWTAndUser() { Token = jwt, User = result };
                         return Ok(userAndToken);
                     }
@@ -90,13 +93,14 @@ namespace GatewayService.Controllers
         [HttpGet("jwt")]
         public ActionResult<string> Jwt()
         {
+            //On recuper les donnee de l'user
             var userName = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Name)?.Value;
 
             foreach (var claim in User.Claims)
             {
                 Console.WriteLine(claim.Type + " " + claim.Value);
             }
-            Console.WriteLine("jwt");
+
             return Ok($"Hello, {userName}");
         }
         private string GenerateJwtToken(int userId)
@@ -105,10 +109,12 @@ namespace GatewayService.Controllers
             {
                 new Claim("UserId", userId.ToString())
             };
-
+            //Creation de la cle 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("H6K5Wiv9JDyy8mEba5Sc6zvH3HmsFk853K85kZ2J77aR"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            //Creation du certificat 
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            //Creation du token avec le certificat
             var token = new JwtSecurityToken(
                 issuer: "TodoProject",
                 audience: "localhost:5000",

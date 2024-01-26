@@ -19,14 +19,16 @@ namespace Front.Services
             _sessionStorage = sessionStorage;
         }
 
+        //Demande de connexion
         public async Task<UserDTO> AuthenticateUserAsync(string username, string password)
         {
             var login = new UserLogin() { Name = username, Pass = password };
-
+            //On envoie une demande de connexion à la Gatewau
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/User/login", login);
 
             if (response.IsSuccessStatusCode)
             {
+                //On récupere les informations de session
                 var result = await response.Content.ReadFromJsonAsync<JWTAndUser>();
                 if(result!=null)
                 {
@@ -45,8 +47,10 @@ namespace Front.Services
             }
         }
 
+        //Demande d'inscription
         public async Task<UserDTO> RegisterUser(string username, string password, string email)
         {
+            //Information d'inscription
             var registerInfo = new UserCreate() { Name = username, Password = password, Email = email };
 
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync("http://localhost:5000/api/User/register", registerInfo);
