@@ -1,19 +1,37 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #0A1828;
+    color: #bfa181;
 }
 
 a, .btn-link {
-    color: #006bb7;
+    color: #bfa181;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    color: #bfa181;
+    background-color: #0a1828;
+    border: 2px solid #bfa181;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:hover {
+    color: #bfa181;
+    background-color: #bfa18150;
+    border-color: #bfa181;
+    border-width: 3px;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus {
+    color: #bfa181;
+    background-color: #bfa18170;
+    border-color: #bfa181;
+    outline: 4px solid #bfa181 !important;
+}
+
+.form-control:focus, .form-check-input:focus {
+    outline: 4px solid #bfa181 !important;
+    border-color: #bfa181;
+    border-width: 3px;
 }
 
 .content {

@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Front</a>
+        <a class="navbar-brand" href="" style="color: #178582">TaZZkTracker</a>
     </div>
 </div>
 
@@ -10,7 +10,7 @@
     <nav class="flex-column">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Menu
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> <a style="color: #178582">Menu</a>
                     </NavLink>
                 </div>
         <AuthorizeView Roles="User">
@@ -18,19 +18,19 @@
 
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="tasks">
-                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> To-Do-List
+                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> <a style="color: #178582">To-Do-List</a>
                     </NavLink>
                 </div>
             </Authorized>
             <NotAuthorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Se connecter
+                        <span aria-hidden="true"></span> <a style="color: #178582">Se connecter</a>
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="register" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> S'inscrire
+                        <span aria-hidden="true"></span> <a style="color: #178582">S'inscrire</a>
                     </NavLink>
                 </div>
             </NotAuthorized>

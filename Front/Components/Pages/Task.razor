@@ -1,19 +1,28 @@
 @page "/tasks"
 @inject TodoService todoService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider authStateProvider
 
-<PageTitle>Task list</PageTitle>
+<PageTitle>Liste des Tâches</PageTitle>
 
-<h1>Task list</h1>
+<AuthorizeView>
+    <Authorized>
+        <h1>Liste des Tâches de @context.User.Identity.Name :</h1>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Votre Liste des Tâches :</h1>
+    </NotAuthorized>
+</AuthorizeView>
 
-<p>What should I do before tommorow</p>
+<p>Vos objectifs de la journée</p>
 
 @if (todos == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Chargement...</em></p>
 }
 else
 {
-    <button class="btn btn-primary" @onclick="addTodo">Add a new todo</button>
+    <button class="btn btn-primary" @onclick="addTodo">Ajouter une tâche</button>
     <table class="table">
         <thead>
             <tr>

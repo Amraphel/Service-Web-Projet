@@ -11,12 +11,13 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    <p>@context.User.Identity.Name
+                    <p style ="color: #178582">
+                        @context.User.Identity.Name
                         <button class="btn btn-primary" @onclick="Logout">Se déconnecter</button>
                     </p>
                 </Authorized>
                 <NotAuthorized>
-                    <p>Vous n'êtes pas connecté</p>
+                    <p style="color: #178582">Vous n'êtes pas connecté</p>
                 </NotAuthorized>
             </AuthorizeView>
             
